@@ -11,6 +11,7 @@ import UIKit
 
 protocol RealmProviderProtocol {
     func saveNotesToDatabase(text: String, name: String)
+    func deleteNotesFromDatabase(name: Object)
     func getResult<T: RealmFetchable>(nameObject: T.Type) -> Results<T>
     func editNotes(oldNotes: RealmNotesList?, newtext: String)
 }
@@ -22,7 +23,11 @@ class RealmProvader: RealmProviderProtocol {
             realm.add(name)
         }
     }
-    
+    func deleteNotesFromDatabase(name: Object) {
+        try! realm.write {
+            realm.delete(name)
+        }
+    }
     func getResult<T: RealmFetchable>(nameObject: T.Type) -> Results<T> {
         realm.objects(nameObject.self)
     }
