@@ -64,5 +64,25 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         }
         return UITableViewCell()
     }
+    
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        true
+    }
+    
+    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+        .delete
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            guard let notes = presenter.getNotesFromRealmByIndex(index: indexPath.row) else { return }
+            presenter.deleteNotesFromDatabase(name: notes)
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let notes = presenter.getNotesFromRealmByIndex(index: indexPath.row) else { return }
+        presenter.tapOnButtonEdit(notes: notes)
+    }
 }
 

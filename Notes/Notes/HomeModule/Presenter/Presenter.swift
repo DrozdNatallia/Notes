@@ -14,6 +14,7 @@ protocol HomeViewPresenterProtocol {
     func configure(cell: NotesCellProtocol, row: Int)
     func getCountNotes() -> Int
     func getListNotes<T: RealmFetchable>(nameObject: T.Type) -> Results<T>
+    func deleteNotesFromDatabase(name: Object)
     
 }
 
@@ -48,5 +49,9 @@ final class HomeViewPresenter: HomeViewPresenterProtocol {
 
     func getListNotes<T: RealmFetchable>(nameObject: T.Type) -> Results<T> {
         return realmProvaider?.getResult(nameObject: RealmNotesList.self) as! Results<T>
+    }
+    
+    func deleteNotesFromDatabase(name: Object) {
+        realmProvaider?.deleteNotesFromDatabase(name: name)
     }
 }
