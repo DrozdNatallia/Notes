@@ -10,7 +10,7 @@ import UIKit
 import RealmSwift
 
 protocol HomeViewPresenterProtocol {
-    func tapOnButtonEdit()
+    func tapOnButtonEdit(notes: RealmNotesList?)
     func configure(cell: NotesCellProtocol, row: Int)
     func getCountNotes() -> Int
     func getListNotes<T: RealmFetchable>(nameObject: T.Type) -> Results<T>
@@ -31,8 +31,8 @@ final class HomeViewPresenter: HomeViewPresenterProtocol {
         self.realmProvaider = realm
     }
     
-    func tapOnButtonEdit() {
-        router?.showNotesViewController()
+    func tapOnButtonEdit(notes: RealmNotesList?) {
+        router?.showNotesViewController(notes: notes)
     }
     
     

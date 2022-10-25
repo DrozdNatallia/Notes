@@ -10,7 +10,7 @@ import UIKit
 
 protocol AsselderBuildProtocol {
     func createModel(router: RouterProtocol) -> UIViewController
-    func createNotesModule(router: RouterProtocol)-> UIViewController
+    func createNotesModule(router: RouterProtocol, notes: RealmNotesList?)-> UIViewController
 }
 
 class BuilderClass: AsselderBuildProtocol {
@@ -26,10 +26,15 @@ class BuilderClass: AsselderBuildProtocol {
         return UIViewController()
     }
     
-    func createNotesModule(router: RouterProtocol)-> UIViewController {
+    func createNotesModule(router: RouterProtocol, notes: RealmNotesList?)-> UIViewController {
         let viewController = NotesViewController(nibName: "NotesViewController", bundle: nil)
         let realmProvaider = RealmProvader()
         let presenter = NotesViewPresenter(view: viewController, router: router, realm: realmProvaider)
+        if let notes = notes {
+            viewController.notesRealm = notes
+        }
+        
+        //viewController.notes = notes
         viewController.presenter = presenter
         return viewController
     }

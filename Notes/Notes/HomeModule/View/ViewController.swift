@@ -47,7 +47,7 @@ class ViewController: UIViewController, HomeViewProtocol {
     }
     
     @IBAction func onAddNotesButton(_ sender: Any) {
-        presenter.tapOnButtonEdit()
+        presenter.tapOnButtonEdit(notes: nil)
     }
 }
 
