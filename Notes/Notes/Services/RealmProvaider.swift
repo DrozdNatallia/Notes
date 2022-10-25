@@ -12,6 +12,7 @@ import UIKit
 protocol RealmProviderProtocol {
     func saveNotesToDatabase(text: String, name: String)
     func getResult<T: RealmFetchable>(nameObject: T.Type) -> Results<T>
+    func editNotes(oldNotes: RealmNotesList?, newtext: String)
 }
 
 class RealmProvader: RealmProviderProtocol {
@@ -31,5 +32,12 @@ class RealmProvader: RealmProviderProtocol {
         newNotes.name = name
         newNotes.notes = text
         writeObjectToDatabase(name: newNotes)
-    }    
+    }
+    
+    func editNotes(oldNotes: RealmNotesList?, newtext: String){
+      guard var realmNotes = oldNotes else { return }
+        try! realm.write {
+            realmNotes.notes = newtext
+        }
+    }
 }

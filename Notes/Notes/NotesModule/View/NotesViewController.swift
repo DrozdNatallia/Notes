@@ -14,7 +14,7 @@ protocol NotesViewProtocol: AnyObject {
 
 class NotesViewController: UIViewController, NotesViewProtocol {
     var presenter: NotesViewPresenterProtocol!
-
+    var notesRealm: RealmNotesList!
     @IBOutlet weak var textArea: UITextView!
     override func viewDidLoad() {
         super.viewDidLoad()

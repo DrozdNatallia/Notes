@@ -10,6 +10,7 @@ import UIKit
 
 protocol NotesViewPresenterProtocol {
     func writeNotesToDatabase(text: String, name: String)
+    func editNotes(notes: RealmNotesList?, text: String)
 }
 
 final class NotesViewPresenter: NotesViewPresenterProtocol {
@@ -26,6 +27,10 @@ final class NotesViewPresenter: NotesViewPresenterProtocol {
     
     func writeNotesToDatabase(text: String, name: String) {
         realmProvaider?.saveNotesToDatabase(text: text, name: name)
+    }
+    
+    func editNotes(notes: RealmNotesList?, text: String) {
+        realmProvaider?.editNotes(oldNotes: notes, newtext: text)
     }
 }
 
