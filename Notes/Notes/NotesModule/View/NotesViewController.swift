@@ -19,6 +19,8 @@ class NotesViewController: UIViewController, NotesViewProtocol {
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(didTapDoneButton))
+        guard let notesRealm = notesRealm else { return }
+        textArea.text = notesRealm.notes
     }
 
     @objc func didTapDoneButton(){

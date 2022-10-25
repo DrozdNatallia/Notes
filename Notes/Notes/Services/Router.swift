@@ -14,8 +14,6 @@ protocol RouterMain {
 
 protocol RouterProtocol: RouterMain {
     func initialViewController()
-    func showNotesViewController()
-  //  func popToRoot()
     func showNotesViewController(notes: RealmNotesList?)
     func popToRoot()
 }
@@ -29,7 +27,6 @@ class Router: RouterProtocol {
         self.assemblyBuilder = assemblyBuilder
     }
     
-    // homeViewController
     func initialViewController() {
         if let navigationController = navigationController {
             guard let homeViewController = assemblyBuilder?.createModel(router: self) else { return }
@@ -50,12 +47,3 @@ class Router: RouterProtocol {
         }
     }
 }
-
-
-
-//func showFlightsModule(location: String, icon: UIImage?) {
-//    if let navigationController = navigationController {
-//        guard let flightsViewController = assemblyBuilder?.createFlightsModule(location: location, image: icon, router: self) else { return }
-//        navigationController.pushViewController(flightsViewController, animated: true)
-//    }
-//}
