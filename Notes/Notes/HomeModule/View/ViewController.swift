@@ -25,7 +25,7 @@ class ViewController: UIViewController, HomeViewProtocol {
         
         notesTableView.register(UINib(nibName: "NotesCell", bundle: nil), forCellReuseIdentifier: "NotesCell")
         
-        var list = presenter.getListNotes(nameObject: RealmNotesList.self)
+        let list = presenter.getListNotes(nameObject: RealmNotesList.self)
         notificationToken = list.observe { [weak self] (changes: RealmCollectionChange) in
             guard let tableView = self?.notesTableView else { return }
             switch changes {
