@@ -17,6 +17,7 @@ protocol RouterProtocol: RouterMain {
     func showNotesViewController()
   //  func popToRoot()
     func showNotesViewController(notes: RealmNotesList?)
+    func popToRoot()
 }
 
 class Router: RouterProtocol {
@@ -40,6 +41,12 @@ class Router: RouterProtocol {
         if let navigationController = navigationController {
             guard let notesViewController = assemblyBuilder?.createNotesModule(router: self, notes: notes) else {return}
             navigationController.pushViewController(notesViewController, animated: true)
+        }
+    }
+    
+    func popToRoot() {
+        if let navigationController = navigationController {
+            navigationController.popViewController(animated: true)
         }
     }
 }

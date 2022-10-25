@@ -11,6 +11,7 @@ import UIKit
 protocol NotesViewPresenterProtocol {
     func writeNotesToDatabase(text: String, name: String)
     func editNotes(notes: RealmNotesList?, text: String)
+    func popToRoot()
 }
 
 final class NotesViewPresenter: NotesViewPresenterProtocol {
@@ -31,6 +32,10 @@ final class NotesViewPresenter: NotesViewPresenterProtocol {
     
     func editNotes(notes: RealmNotesList?, text: String) {
         realmProvaider?.editNotes(oldNotes: notes, newtext: text)
+    }
+    
+    func popToRoot() {
+        router?.popToRoot()
     }
 }
 
