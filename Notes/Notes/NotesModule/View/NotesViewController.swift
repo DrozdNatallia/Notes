@@ -23,9 +23,14 @@ class NotesViewController: UIViewController, NotesViewProtocol {
 
     @objc func didTapDoneButton(){
         guard let text = textArea.text else { return }
-        presenter.writeNotesToDatabase(text: text, name: "newNotes")
-        let realm = try! Realm()
-       print(realm.configuration.fileURL)
+        if notesRealm == nil {
+            presenter.writeNotesToDatabase(text: text, name: "newNotes")
+        } else {
+            presenter.editNotes(notes: notesRealm, text: text)
+        }
+        presenter.popToRoot()
 
+//        let realm = try! Realm()
+//       print(realm.configuration.fileURL)
     }
 }
